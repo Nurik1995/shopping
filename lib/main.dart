@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping/screens/home/home_screen.dart';
-// import 'package:shopping/HomeScreen.dart';
+import 'package:shopping/HomeScreen.dart';
 import 'package:shopping/signup.dart';
 import 'package:shopping/login.dart';
 // import 'dart:convert';

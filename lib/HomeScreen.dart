@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:session_manager/session_manager.dart';
+import 'package:shopping/HomeScreen2.dart';
+import 'package:session_storage/session_storage.dart';
+import 'package:shopping/pages/CartPage.dart';
+import 'package:shopping/pages/HomePage.dart';
+import 'package:shopping/pages/ItemPage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,11 +16,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Shopping App'),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
       ),
-      body: const Center(child: Text('You have pressed the button times.')),
+      routes: {
+        "/": (context) => const HomePage(),
+        "cartPage": (context) => const CartPage(),
+        "itemPage": (context) => ItemPage(),
+      },
     );
   }
 }
