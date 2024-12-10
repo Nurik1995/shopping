@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:session_manager/session_manager.dart';
 import 'globals.dart' as globals;
 import 'package:session_storage/session_storage.dart';
 
@@ -42,7 +41,7 @@ class _SignupCardState extends State<SignupCard> {
 
       // SessionManager().setString('customer', 'night');
 
-      SessionStorage().addAll({'language': 'azeri', 'name': 'Sessiyaci'});
+      SessionStorage().addAll({'user': loginController.text});
 
       Navigator.pushNamed(
         context,

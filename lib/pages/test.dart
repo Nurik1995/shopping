@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       // resizeToAvoidBottomInset: false,
       body: ListView(
         children: [
-          HomeAppBar(),
+          const HomeAppBar(),
           Container(
             height: 500,
             padding: const EdgeInsets.only(top: 15),

@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
         // physics: AlwaysScrollableScrollPhysics(),
         // physics: const NeverScrollableScrollPhysics(),
         children: [
-          HomeAppBar(),
+          const HomeAppBar(),
           Container(
             // height: 500,
             padding: const EdgeInsets.only(top: 15),

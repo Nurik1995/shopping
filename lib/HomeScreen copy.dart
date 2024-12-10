@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:session_manager/session_manager.dart';
 import 'package:shopping/HomeScreen2.dart';
 import 'package:session_storage/session_storage.dart';
 

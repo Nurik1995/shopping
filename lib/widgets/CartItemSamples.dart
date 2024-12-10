@@ -90,7 +90,8 @@ class CartItemSamples extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: const Text(
                                 "01",
                                 style: TextStyle(

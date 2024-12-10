@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:session_manager/session_manager.dart';
-import 'package:shopping/HomeScreen2.dart';
-import 'package:session_storage/session_storage.dart';
 import 'package:shopping/pages/CartPage.dart';
 import 'package:shopping/pages/HomePage.dart';
 import 'package:shopping/pages/ItemPage.dart';
