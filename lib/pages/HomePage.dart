@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:session_storage/session_storage.dart';
 import 'package:shopping/widgets/CategoriesWidget.dart';
 import 'package:shopping/widgets/HomeAppBar.dart';
 import 'package:shopping/widgets/ItemsWidget.dart';

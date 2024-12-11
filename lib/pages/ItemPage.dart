@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -21,6 +23,16 @@ class ItemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // get arguments - 1
+    // dynamic arguments = ModalRoute.of(context)?.settings.arguments;
+    // print(arguments['image']);
+
+    // get arguments - 2
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? '')
+        as Map<String, dynamic>;
+    print(arguments['image']);
+    int image = arguments['image'];
+
     return Scaffold(
       backgroundColor: const Color(0xFFEDECF2),
       body: ListView(
@@ -29,7 +41,7 @@ class ItemPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: Image.asset(
-              "images/5.png",
+              "images/$image.png",
               height: 300,
             ),
           ),
