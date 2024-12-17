@@ -1,107 +1,93 @@
+import 'dart:convert';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping/model/product.dart';
+import 'package:shopping/model/product_response.dart';
 import 'package:shopping/widgets/CategoriesWidget.dart';
 import 'package:shopping/widgets/HomeAppBar.dart';
 import 'package:shopping/widgets/ItemsWidget.dart';
+import 'package:http/http.dart' as http;
+import 'package:shopping/globals.dart' as globals;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    getProducts();
+    print(products.length);
+  }
+
+  List<Product> products = List<Product>.empty();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       // resizeToAvoidBottomPadding: false,
-      body: ListView(
-        // physics: AlwaysScrollableScrollPhysics(),
-        // physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const HomeAppBar(),
-          Container(
-            // height: 500,
-            padding: const EdgeInsets.only(top: 15),
-            decoration: const BoxDecoration(
-              color: Color(0xFFEDECF2),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(35),
-                topRight: Radius.circular(35),
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,
+        title: const Text("Products"),
+        elevation: 6,
+      ),
+      body: GridView.builder(
+        itemCount: products.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.9,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 15,
+              vertical: 8,
             ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.grey),
+            ),
+            padding: const EdgeInsets.all(15),
+            alignment: Alignment.center,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Search Widget
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  // height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 5),
-                        height: 50,
-                        width: 300,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Search here...",
-                          ),
-                        ),
+                InkWell(
+                  // onTap: () {
+                  //   Navigator.of(context).push(
+                  //     MaterialPageRoute(
+                  //       builder: (context) => ProductDetails(
+                  //         product: products[index],
+                  //       ),
+                  //     ),
+                  //   );
+                  // },
+                  child: Hero(
+                    tag: products[index].prd_thumbnail ?? '',
+                    child: Container(
+                      height: 170,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD5DCDE),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.camera_alt,
-                        size: 27,
-                        color: Color(0xFF4C53A5),
-                      )
-                    ],
-                  ),
-                ),
-
-                // Categories
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 10,
-                  ),
-                  child: const Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4C53A5),
+                      alignment: Alignment.center,
+                      child: Image.network(
+                        products[index].prd_thumbnail ?? '',
+                      ),
                     ),
                   ),
                 ),
-
-                // Categories Widget
-                const CategoriesWidget(),
-
-                // Items
-                Container(
-                  alignment: Alignment.centerLeft,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  child: const Text(
-                    "Best Selling",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4C53A5),
-                    ),
-                  ),
-                ),
-
-                // Items Widget
-                const ItemsWidget(),
               ],
             ),
-          )
-        ],
+          );
+        },
       ),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
@@ -127,5 +113,37 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // getProducts() async {
+  //   // print('welcome');
+  //   // print('welcome222');
+  //   var res = await http
+  //       .get(Uri.parse('${globals.ipAddress}/insert/shopping_products.php'));
+  //   print(res);
+  //   ProductResponse response = ProductResponse.fromJson(jsonDecode(res.body));
+  //   print(111);
+  //   print(res);
+  //   print(222222);
+
+  //   setState(() {
+  //     products = response.products ?? [];
+  //   });
+  // }
+
+  getProducts() async {
+    // print('welcome');
+    // print('welcome222');
+    var res = await http
+        .get(Uri.parse('${globals.ipAddress}/insert/shopping_products.php'));
+    print(res);
+    ProductResponse response = ProductResponse.fromJson(jsonDecode(res.body));
+    // print(111);
+    // print(res);
+    // print(222222);
+
+    setState(() {
+      products = response.products ?? [];
+    });
   }
 }
